@@ -18,7 +18,9 @@ $routes->get('/users/delete/(:num)', 'UserController::delete/$1');
 
 // Items
 $routes->get('/items', 'ItemController::index');
-$routes->post('/items', 'ItemController::create');
+$routes->get('/items/create', 'ItemController::create');
+$routes->post('/items/store', 'ItemController::store');
 $routes->get('/items/(:num)', 'ItemController::show/$1');
-$routes->post('/items', 'ItemController::update');
-$routes->get('/items/(:num)', 'ItemController::delete/$1');
+$routes->get('/items/edit/(:num)', 'ItemController::edit/$1');
+$routes->post('/items/update', 'ItemController::update');
+$routes->get('/items/delete/(:num)', 'ItemController::delete/$1');

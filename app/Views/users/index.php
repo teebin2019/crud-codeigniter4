@@ -58,12 +58,12 @@
                                     <td> <?= $user["email"] ?></td>
                                     <td><a href="<?= site_url('users/' . $user['id']) ?>" class="btn btn-info btn-sm">Show</a></td>
                                     <td><a href="<?= site_url('users/edit/' . $user['id']) ?>" class="btn btn-warning btn-sm">Edit</a></td>
-                                    <td><button href="<?= site_url('users/delete/' . $user['id']) ?>" onclick="delete_data(<?= $user['id'] ?>)" class="btn btn-danger btn-sm">Delete</button></td>
+                                    <td><button onclick="delete_data(<?= $user['id'] ?>)" class="btn btn-danger btn-sm">Delete</button></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="5" class="text-center">No Data Found</td>
+                                <td colspan="6" class="text-center">No Data Found</td>
                             </tr>
                         <?php endif; ?>
                     </table>
@@ -108,12 +108,10 @@
     }
 </style>
 <script>
-function delete_data(id)
-{
-    if(confirm("Are you sure you want to remove it?"))
-    {
-        window.location.href="<?php echo base_url(); ?>/users/delete/"+id;
+    function delete_data(id) {
+        if (confirm("Are you sure you want to remove it?")) {
+            window.location.href = "<?php echo base_url(); ?>/users/delete/" + id;
+        }
+        return false;
     }
-    return false;
-}
 </script>

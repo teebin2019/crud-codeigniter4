@@ -4,42 +4,40 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-use App\Models\UserModel;
+use App\Models\ItemModel;
 
-class UserController extends BaseController
+class ItemController extends BaseController
 {
     public function index()
     {
         //
-        $userModel = new UserModel();
+        $itemModel = new ItemModel();
 
-        $data['user_data'] =  $userModel->orderBy('id', 'DESC')->paginate(10);
-        $data['pagination_link'] = $userModel->pager;
-        return view('users/index', $data);
+        $data['item_data'] =  $itemModel->orderBy('id', 'DESC')->paginate(10);
+        $data['pagination_link'] = $itemModel->pager;
+        return view('items/index', $data);
     }
 
     public function create()
     {
-        return view('users/create');
+        return view('items/create');
     }
 
     public function store()
     {
         helper(['form', 'url']);
         $rules = $this->validate([
-            'name'    =>    'required',
-            'email'    =>    'required|valid_email',
-            'password' => 'required|min_length[6]'
+            'title'    =>    'required',
+            'description'    =>    'required',
         ]);
 
         if ($rules) {
-            $userModel = new UserModel();
+            $itemModel = new ItemModel();
 
             try {
-                $userModel->save([
-                    'name'    =>    $this->request->getVar('name'),
-                    'email'    =>    $this->request->getVar('email'),
-                    'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
+                $itemModel->save([
+                    'title'    =>    $this->request->getVar('title'),
+                    'description'    =>    $this->request->getVar('description')
                 ]);
             } catch (\Exception $e) {
                 exit('Error: ' . $e->getMessage());
@@ -47,11 +45,11 @@ class UserController extends BaseController
 
             $session = \Config\Services::session();
 
-            $session->setFlashdata('success', 'User Data Added');
+            $session->setFlashdata('success', 'Item Data Added');
 
-            return $this->response->redirect(site_url('/users'));
+            return $this->response->redirect(site_url('/items'));
         } else {
-            echo view('users/create', [
+            echo view('items/create', [
                 'error'     => $this->validator
             ]);
         }
@@ -59,63 +57,63 @@ class UserController extends BaseController
 
     public function show($id)
     {
-        $userModel = new UserModel();
-        $data['user'] =  $userModel->where('id', $id)->first();
-        return view('users/show', $data);
+        $itemModel = new ItemModel();
+        $data['item'] =  $itemModel->where('id', $id)->first();
+        return view('items/show', $data);
     }
     public function edit($id)
     {
-        $userModel = new UserModel();
-        $data['user'] =  $userModel->where('id', $id)->first();
-        return view('users/edit', $data);
+        $itemModel = new ItemModel();
+        $data['item'] =  $itemModel->where('id', $id)->first();
+        return view('items/edit', $data);
     }
 
     public function update()
     {
         helper(['form', 'url']);
         $rules = $this->validate([
-            'name'    =>    'required',
-            'email'    =>    'required|valid_email',
+            'title'    =>    'required',
+            'description'    =>    'required',
         ]);
-        $userModel = new UserModel();
+        $itemModel = new ItemModel();
         $id = $this->request->getVar('id');
 
         if ($rules) {
-            $userModel = new UserModel();
+            $itemModel = new ItemModel();
 
             try {
                 $data = [
-                    'name' => $this->request->getVar('name'),
-                    'email'  => $this->request->getVar('email'),
+                    'title'    =>    $this->request->getVar('title'),
+                    'description'    =>    $this->request->getVar('description')
                 ];
-                $userModel->update($id, $data);
+                $itemModel->update($id, $data);
             } catch (\Exception $e) {
                 exit('Error: ' . $e->getMessage());
             }
 
             $session = \Config\Services::session();
 
-            $session->setFlashdata('success', 'User Data Updated');
+            $session->setFlashdata('success', 'Item Data Updated');
 
-            return $this->response->redirect(site_url('/users'));
+            return $this->response->redirect(site_url('/items'));
         } else {
-            $data['user'] = $userModel->where('id', $id)->first();
+            $data['item'] = $itemModel->where('id', $id)->first();
             $data['error'] = $this->validator;
-            echo view('edit_data', $data);
+            echo view('items/edit', $data);
         }
     }
 
     public function delete($id)
     {
         //
-        $userModel = new UserModel();
+        $itemModel = new ItemModel();
 
-        $userModel->where('id', $id)->delete($id);
+        $itemModel->where('id', $id)->delete($id);
 
         $session = \Config\Services::session();
 
-        $session->setFlashdata('success', 'User Data Deleted');
+        $session->setFlashdata('success', 'Item Data Deleted');
 
-        return $this->response->redirect(site_url('/users'));
+        return $this->response->redirect(site_url('/items'));
     }
 }

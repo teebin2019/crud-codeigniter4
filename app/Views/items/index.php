@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col">Sample Data</div>
                     <div class="col text-right">
-                        <a href="<?php echo site_url('users/create'); ?>" class="btn btn-primary">Add User</a>
+                        <a href="<?php echo site_url('items/create'); ?>" class="btn btn-primary">Add Item</a>
                     </div>
                 </div>
             </div>
@@ -46,24 +46,23 @@
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
-                        <?php if ($user_data): ?>
+                        <?php if ($item_data): ?>
                             <?php
-                            foreach ($user_data as $user) :
+                            foreach ($item_data as $item) :
                             ?>
 
-
                                 <tr>
-                                    <td><?= $user["id"] ?></td>
-                                    <td><?= $user["name"] ?></td>
-                                    <td> <?= $user["email"] ?></td>
-                                    <td><a href="<?= site_url('users/' . $user['id']) ?>" class="btn btn-info btn-sm">Show</a></td>
-                                    <td><a href="<?= site_url('users/edit/' . $user['id']) ?>" class="btn btn-warning btn-sm">Edit</a></td>
-                                    <td><button href="<?= site_url('users/delete/' . $user['id']) ?>" onclick="delete_data(<?= $user['id'] ?>)" class="btn btn-danger btn-sm">Delete</button></td>
+                                    <td><?= $item["id"] ?></td>
+                                    <td><?= $item["title"] ?></td>
+                                    <td> <?= $item["description"] ?></td>
+                                    <td><a href="<?= site_url('items/' . $item['id']) ?>" class="btn btn-info btn-sm">Show</a></td>
+                                    <td><a href="<?= site_url('items/edit/' . $item['id']) ?>" class="btn btn-warning btn-sm">Edit</a></td>
+                                    <td><button onclick="delete_data(<?= $item['id'] ?>)" class="btn btn-danger btn-sm">Delete</button></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="5" class="text-center">No Data Found</td>
+                                <td colspan="6" class="text-center">No Data Found</td>
                             </tr>
                         <?php endif; ?>
                     </table>
@@ -108,12 +107,10 @@
     }
 </style>
 <script>
-function delete_data(id)
-{
-    if(confirm("Are you sure you want to remove it?"))
-    {
-        window.location.href="<?php echo base_url(); ?>/users/delete/"+id;
+    function delete_data(id) {
+        if (confirm("Are you sure you want to remove it?")) {
+            window.location.href = "<?php echo base_url(); ?>/items/delete/" + id;
+        }
+        return false;
     }
-    return false;
-}
 </script>
