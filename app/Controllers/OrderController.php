@@ -43,8 +43,6 @@ class OrderController extends BaseController
             try {
 
                 $items = $this->request->getVar('items');
-
-
                 foreach ($items as $item) {
                     $orderModel->insert([
                         'id_user'    =>    $this->request->getVar('id_user'),
