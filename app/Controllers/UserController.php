@@ -101,7 +101,7 @@ class UserController extends BaseController
         } else {
             $data['user'] = $userModel->where('id', $id)->first();
             $data['error'] = $this->validator;
-            echo view('edit_data', $data);
+            echo view('users/edit', $data);
         }
     }
 

@@ -18,7 +18,18 @@ $routes->get('/users/delete/(:num)', 'UserController::delete/$1');
 
 // Items
 $routes->get('/items', 'ItemController::index');
-$routes->post('/items', 'ItemController::create');
+$routes->get('/items/create', 'ItemController::create');
+$routes->post('/items/store', 'ItemController::store');
 $routes->get('/items/(:num)', 'ItemController::show/$1');
-$routes->post('/items', 'ItemController::update');
-$routes->get('/items/(:num)', 'ItemController::delete/$1');
+$routes->get('/items/edit/(:num)', 'ItemController::edit/$1');
+$routes->post('/items/update', 'ItemController::update');
+$routes->get('/items/delete/(:num)', 'ItemController::delete/$1');
+
+// Orders
+$routes->get('/orders', 'OrderController::index');
+$routes->get('/orders/create', 'OrderController::create');
+$routes->post('/orders/store', 'OrderController::store');
+$routes->get('/orders/(:num)', 'OrderController::show/$1');
+$routes->get('/orders/edit/(:num)', 'OrderController::edit/$1');
+$routes->post('/orders/update', 'OrderController::update');
+$routes->get('/orders/delete/(:num)', 'OrderController::delete/$1');
