@@ -70,65 +70,65 @@ class OrderController extends BaseController
         }
     }
 
-    public function show($id)
-    {
-        $orderModel = new OrderModel();
-        $data['item'] =  $orderModel->where('id', $id)->first();
-        return view('orders/show', $data);
-    }
-    public function edit($id)
-    {
-        $orderModel = new OrderModel();
-        $data['item'] =  $orderModel->where('id', $id)->first();
-        return view('orders/edit', $data);
-    }
+    // public function show($id)
+    // {
+    //     $orderModel = new OrderModel();
+    //     $data['item'] =  $orderModel->where('id', $id)->first();
+    //     return view('orders/show', $data);
+    // }
+    // public function edit($id)
+    // {
+    //     $orderModel = new OrderModel();
+    //     $data['item'] =  $orderModel->where('id', $id)->first();
+    //     return view('orders/edit', $data);
+    // }
 
-    public function update()
-    {
-        helper(['form', 'url']);
-        $rules = $this->validate([
-            'title'    =>    'required',
-            'description'    =>    'required',
-        ]);
-        $orderModel = new OrderModel();
-        $id = $this->request->getVar('id');
+    // public function update()
+    // {
+    //     helper(['form', 'url']);
+    //     $rules = $this->validate([
+    //         'title'    =>    'required',
+    //         'description'    =>    'required',
+    //     ]);
+    //     $orderModel = new OrderModel();
+    //     $id = $this->request->getVar('id');
 
-        if ($rules) {
-            $orderModel = new OrderModel();
+    //     if ($rules) {
+    //         $orderModel = new OrderModel();
 
-            try {
-                $data = [
-                    'title'    =>    $this->request->getVar('title'),
-                    'description'    =>    $this->request->getVar('description')
-                ];
-                $orderModel->update($id, $data);
-            } catch (\Exception $e) {
-                exit('Error: ' . $e->getMessage());
-            }
+    //         try {
+    //             $data = [
+    //                 'title'    =>    $this->request->getVar('title'),
+    //                 'description'    =>    $this->request->getVar('description')
+    //             ];
+    //             $orderModel->update($id, $data);
+    //         } catch (\Exception $e) {
+    //             exit('Error: ' . $e->getMessage());
+    //         }
 
-            $session = \Config\Services::session();
+    //         $session = \Config\Services::session();
 
-            $session->setFlashdata('success', 'Item Data Updated');
+    //         $session->setFlashdata('success', 'Item Data Updated');
 
-            return $this->response->redirect(site_url('/orders'));
-        } else {
-            $data['item'] = $orderModel->where('id', $id)->first();
-            $data['error'] = $this->validator;
-            echo view('orders/edit', $data);
-        }
-    }
+    //         return $this->response->redirect(site_url('/orders'));
+    //     } else {
+    //         $data['item'] = $orderModel->where('id', $id)->first();
+    //         $data['error'] = $this->validator;
+    //         echo view('orders/edit', $data);
+    //     }
+    // }
 
-    public function delete($id)
-    {
-        //
-        $orderModel = new OrderModel();
+    // public function delete($id)
+    // {
+    //     //
+    //     $orderModel = new OrderModel();
 
-        $orderModel->where('id', $id)->delete($id);
+    //     $orderModel->where('id', $id)->delete($id);
 
-        $session = \Config\Services::session();
+    //     $session = \Config\Services::session();
 
-        $session->setFlashdata('success', 'Item Data Deleted');
+    //     $session->setFlashdata('success', 'Item Data Deleted');
 
-        return $this->response->redirect(site_url('/orders'));
-    }
+    //     return $this->response->redirect(site_url('/orders'));
+    // }
 }
