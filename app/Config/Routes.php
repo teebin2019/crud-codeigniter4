@@ -24,3 +24,12 @@ $routes->get('/items/(:num)', 'ItemController::show/$1');
 $routes->get('/items/edit/(:num)', 'ItemController::edit/$1');
 $routes->post('/items/update', 'ItemController::update');
 $routes->get('/items/delete/(:num)', 'ItemController::delete/$1');
+
+// Orders
+$routes->get('/oders', 'OrderController::index');
+$routes->get('/oders/create', 'OrderController::create');
+$routes->post('/oders/store', 'OrderController::store');
+$routes->get('/oders/(:num)', 'OrderController::show/$1');
+$routes->get('/oders/edit/(:num)', 'OrderController::edit/$1');
+$routes->post('/oders/update', 'OrderController::update');
+$routes->get('/oders/delete/(:num)', 'OrderController::delete/$1');
