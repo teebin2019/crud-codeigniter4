@@ -26,10 +26,10 @@ $routes->post('/items/update', 'ItemController::update');
 $routes->get('/items/delete/(:num)', 'ItemController::delete/$1');
 
 // Orders
-$routes->get('/oders', 'OrderController::index');
-$routes->get('/oders/create', 'OrderController::create');
-$routes->post('/oders/store', 'OrderController::store');
-$routes->get('/oders/(:num)', 'OrderController::show/$1');
-$routes->get('/oders/edit/(:num)', 'OrderController::edit/$1');
-$routes->post('/oders/update', 'OrderController::update');
-$routes->get('/oders/delete/(:num)', 'OrderController::delete/$1');
+$routes->get('/orders', 'OrderController::index');
+$routes->get('/orders/create', 'OrderController::create');
+$routes->post('/orders/store', 'OrderController::store');
+$routes->get('/orders/(:num)', 'OrderController::show/$1');
+$routes->get('/orders/edit/(:num)', 'OrderController::edit/$1');
+$routes->post('/orders/update', 'OrderController::update');
+$routes->get('/orders/delete/(:num)', 'OrderController::delete/$1');

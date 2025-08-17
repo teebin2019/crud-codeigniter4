@@ -31,7 +31,7 @@
                 <div class="row">
                     <div class="col">Sample Data</div>
                     <div class="col text-right">
-                        <a href="<?php echo site_url('items/create'); ?>" class="btn btn-primary">Add Item</a>
+                        <a href="<?php echo site_url('/orders/create'); ?>" class="btn btn-primary">Add Order</a>
                     </div>
                 </div>
             </div>
@@ -39,25 +39,19 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Show</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th>ID User</th>
+                            <th>ID Item</th>
                         </tr>
-                        <?php if ($item_data): ?>
+                        <?php if ($order_data): ?>
                             <?php
-                            foreach ($item_data as $item) :
+                            foreach ($order_data as $order) :
                             ?>
 
                                 <tr>
-                                    <td><?= $item["id"] ?></td>
-                                    <td><?= $item["title"] ?></td>
-                                    <td> <?= $item["description"] ?></td>
-                                    <td><a href="<?= site_url('items/' . $item['id']) ?>" class="btn btn-info btn-sm">Show</a></td>
-                                    <td><a href="<?= site_url('items/edit/' . $item['id']) ?>" class="btn btn-warning btn-sm">Edit</a></td>
-                                    <td><button onclick="delete_data(<?= $item['id'] ?>)" class="btn btn-danger btn-sm">Delete</button></td>
+
+                                    <td><?= $order["id_user"] ?></td>
+                                    <td> <?= $order["id_item"] ?></td>
+
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>

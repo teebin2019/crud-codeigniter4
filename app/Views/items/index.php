@@ -40,8 +40,8 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th class="">Title</th>
+                            <th>Description</th>
                             <th>Show</th>
                             <th>Edit</th>
                             <th>Delete</th>

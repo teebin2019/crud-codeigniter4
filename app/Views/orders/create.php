@@ -30,16 +30,21 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="post" action="<?php echo base_url("/items/store") ?>">
+                <form method="post" action="<?php echo base_url("/orders/store") ?>">
 
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" name="title" id="title" class="form-control" />
+                        <label for="title">ผู้ใช้งาน</label>
+                        <select id="inputState" name="id_user" class="form-control">
+                            <option selected>Choose...</option>
+                            <?php foreach ($user_data as $user): ?>
+                                <option value="<?= $user['id'] ?>"><?= $user['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
                         <?php
-                        if ($validation->getError('title')) {
+                        if ($validation->getError('id_user')) {
                             echo "
                             <div class='alert alert-danger mt-2'>
-                            " . $validation->getError('title') . "
+                            " . $validation->getError('id_user') . "
                             </div>
                             ";
                         }
@@ -47,17 +52,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" id="description" rows="3" name="description"></textarea>
-                        <?php
-                        if ($validation->getError('description')) {
-                            echo "
-                            <div class='alert alert-danger mt-2'>
-                            " . $validation->getError('description') . "
-                            </div>
-                            ";
-                        }
-                        ?>
+                        <label for="description">สินค้า</label>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th class="">Title</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if ($item_data): ?>
+                                    <?php foreach ($item_data as $item): ?>
+                                        <tr>
+                                            <th scope="row">
+                                                <input class="form-check-input ml-auto" type="checkbox" name="items[]" value="<?= $item['id'] ?>" id="invalidCheck2">
+                                            </th>
+                                            <td><?= $item['title'] ?></td>
+                                            <td><?= $item['description'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <tr>
+                                        <td colspan="3" class="text-center">No Data Found</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Add</button>

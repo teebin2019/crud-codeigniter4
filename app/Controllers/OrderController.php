@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\OrderModel;
+use App\Models\UserModel;
+use App\Models\ItemModel;
 
 class OrderController extends BaseController
 {
@@ -13,32 +15,42 @@ class OrderController extends BaseController
         //
         $orderModel = new OrderModel();
 
-        $data['order_data'] =  $orderModel->orderBy('id', 'DESC')->paginate(10);
+        $data['order_data'] =  $orderModel->orderBy('id_user', 'DESC')->paginate(10);
         $data['pagination_link'] = $orderModel->pager;
         return view('orders/index', $data);
     }
 
     public function create()
     {
-        return view('orders/create');
+        $userModel = new UserModel();
+        $itemModel = new ItemModel();
+        $data['user_data'] =  $userModel->orderBy('id', 'ASC')->findAll();
+        $data['item_data'] =  $itemModel->orderBy('id', 'ASC')->findAll();
+        return view('orders/create', $data);
     }
 
     public function store()
     {
         helper(['form', 'url']);
+
         $rules = $this->validate([
-            'title'    =>    'required',
-            'description'    =>    'required',
+            'id_user'    =>    'required',
         ]);
 
         if ($rules) {
             $orderModel = new OrderModel();
 
             try {
-                $orderModel->save([
-                    'title'    =>    $this->request->getVar('title'),
-                    'description'    =>    $this->request->getVar('description')
-                ]);
+
+                $items = $this->request->getVar('items');
+
+
+                foreach ($items as $item) {
+                    $orderModel->insert([
+                        'id_user'    =>    $this->request->getVar('id_user'),
+                        'id_item'    =>    $item
+                    ]);
+                }
             } catch (\Exception $e) {
                 exit('Error: ' . $e->getMessage());
             }
@@ -49,9 +61,12 @@ class OrderController extends BaseController
 
             return $this->response->redirect(site_url('/orders'));
         } else {
-            echo view('orders/create', [
-                'error'     => $this->validator
-            ]);
+            $userModel = new UserModel();
+            $itemModel = new ItemModel();
+            $data['error'] =   $this->validator;
+            $data['user_data'] =  $userModel->orderBy('id', 'ASC')->findAll();
+            $data['item_data'] =  $itemModel->orderBy('id', 'ASC')->findAll();
+            echo view('orders/create', $data);
         }
     }
 
