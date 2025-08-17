@@ -41,6 +41,8 @@
                         <tr>
                             <th>ID User</th>
                             <th>ID Item</th>
+                            <th>Pieces</th>
+                            <th>Price</th>
                         </tr>
                         <?php if ($order_data): ?>
                             <?php
@@ -51,12 +53,13 @@
 
                                     <td><?= $order["id_user"] ?></td>
                                     <td> <?= $order["id_item"] ?></td>
-
+                                    <td> <?= $order["pieces"] ?></td>
+                                    <td> <?= $order["price"] ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
                             <tr>
-                                <td colspan="6" class="text-center">No Data Found</td>
+                                <td colspan="2" class="text-center">No Data Found</td>
                             </tr>
                         <?php endif; ?>
                     </table>

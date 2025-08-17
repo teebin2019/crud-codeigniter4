@@ -48,7 +48,9 @@ class OrderController extends BaseController
                 foreach ($items as $item) {
                     $orderModel->insert([
                         'id_user'    =>    $this->request->getVar('id_user'),
-                        'id_item'    =>    $item
+                        'id_item'    =>    $item,
+                        'pieces'    =>    $this->request->getVar('pieces')[$item],
+                        'price'    =>    $this->request->getVar('price')[$item]
                     ]);
                 }
             } catch (\Exception $e) {

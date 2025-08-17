@@ -59,6 +59,8 @@
                                     <th scope="col">#</th>
                                     <th class="">Title</th>
                                     <th>Description</th>
+                                    <th>Pieces</th>
+                                    <th>Price</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -70,6 +72,11 @@
                                             </th>
                                             <td><?= $item['title'] ?></td>
                                             <td><?= $item['description'] ?></td>
+                                            <td>
+                                                <input type="number" name="pieces[<?= $item['id'] ?>]" value="<?= $item['pieces'] ?? 0 ?>">
+
+                                            </td>
+                                            <td><input type="number" name="price[<?= $item['id'] ?>]" value="<?= $item['price'] ?? 0 ?>"></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else : ?>
