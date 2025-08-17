@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<?= $this->extend('layout/content') ?>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, user-scalable=yes">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <title>Codeigniter 4 Crud Application</title>
-    <!--  -->
-</head>
-
-<body>
+<?= $this->section('content') ?>
     <div class="container">
 
         <h2 class="text-center mt-4 mb-4">Codeigniter 4 Crud Application</h2>
@@ -81,33 +71,12 @@
 
     </div>
 
-</body>
 
-</html>
-<style>
-    .pagination li a {
-        position: relative;
-        display: block;
-        padding: .5rem .75rem;
-        margin-left: -1px;
-        line-height: 1.25;
-        color: #007bff;
-        background-color: #fff;
-        border: 1px solid #dee2e6;
-    }
+<?= $this->endSection() ?>
 
-    .pagination li.active a {
-        z-index: 1;
-        color: #fff;
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-</style>
+<?= $this->section('javascript') ?>
 <script>
-    function delete_data(id) {
-        if (confirm("Are you sure you want to remove it?")) {
-            window.location.href = "<?php echo base_url(); ?>/items/delete/" + id;
-        }
-        return false;
-    }
+ 
 </script>
+
+<?= $this->endSection() ?>
